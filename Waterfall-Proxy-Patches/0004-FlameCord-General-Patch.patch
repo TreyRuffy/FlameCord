@@ -61,13 +61,13 @@ index 00000000..dd511dac
 +    <parent>
 +        <groupId>io.github.waterfallmc</groupId>
 +        <artifactId>travertine-parent</artifactId>
-+        <version>1.16-R0.4-SNAPSHOT</version>
++        <version>1.16-R0.5-SNAPSHOT</version>
 +        <relativePath>../pom.xml</relativePath>
 +    </parent>
 +
 +    <groupId>dev._2lstudios</groupId>
 +    <artifactId>travertine-flamecord</artifactId>
-+    <version>1.16-R0.4-SNAPSHOT</version>
++    <version>1.16-R0.5-SNAPSHOT</version>
 +    <packaging>jar</packaging>
 +
 +    <name>Travertine-FlameCord</name>
@@ -1068,7 +1068,7 @@ index ad9a6d0c..ad8f8733 100644
 -            if ( buildDate.before( deadline.getTime() ) )
 -            {
 -                System.err.println( "*** Hey! This build is potentially outdated :( ***" );
--                System.err.println( "*** Please check for a new build from https://papermc.io/ci/job/Travertine/ ***" );
+-                System.err.println( "*** Please check for a new build from https://papermc.io/downloads ***" );
 -                System.err.println( "*** Should this build be outdated, you will get NO support for it. ***" );
 -                System.err.println( "*** Server will start in 10 seconds ***" );
 -                Thread.sleep( TimeUnit.SECONDS.toMillis( 10 ) );
@@ -1432,11 +1432,10 @@ diff --git a/proxy/src/main/java/net/md_5/bungee/connection/InitialHandler.java 
 index fe6ff143..138dffa0 100644
 --- a/proxy/src/main/java/net/md_5/bungee/connection/InitialHandler.java
 +++ b/proxy/src/main/java/net/md_5/bungee/connection/InitialHandler.java
-@@ -19,6 +19,8 @@ import com.google.gson.Gson;
+@@ -19,6 +19,7 @@ import java.util.logging.Level;
+ import javax.crypto.SecretKey;
+ import javax.crypto.spec.SecretKeySpec;
  
- import com.google.gson.JsonElement;
- import com.google.gson.JsonObject;
-+
 +import dev._2lstudios.flamecord.FlameCord;
  import lombok.Getter;
  import lombok.RequiredArgsConstructor;
@@ -1583,7 +1582,7 @@ index fe6ff143..138dffa0 100644
 +        thisState = State.FINISHED;
  
          SecretKey sharedKey = EncryptionUtil.getSecret( encryptResponse, request );
-         BungeeCipher decrypt = EncryptionUtil.getCipher( false, sharedKey );
+         // Waterfall start
 @@ -481,7 +519,10 @@ public class InitialHandler extends PacketHandler implements PendingConnection
                      {
                          loginProfile = obj;
